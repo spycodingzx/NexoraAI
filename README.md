@@ -35,7 +35,7 @@
 - [🎓 Usage Examples](#-usage-examples)
 - [🛠️ Development](#-development)
   - [Project Structure](#project-structure)
-  - [Running Tests](#running-tests)
+  - [Running Tests](#running-specs)
 - [📊 Performance Benchmarks](#-performance-benchmarks)
 - [🤝 Contributing](#-contributing)
 - [📝 License](#-license)
@@ -47,7 +47,7 @@
 ## 🎯 What is This?
 
 The Autonomous Business Platform is a **production-ready, self-hosted AI business automation suite** that combines:
-- **21 specialized tabs + 70 service modules** for every aspect of digital business
+- **21 specialized tabs + 70 service plugins** for every aspect of digital business
 - **100+ AI models** from Replicate, OpenAI, Anthropic, and more
 - **15+ platform integrations** (Printify, Shopify, YouTube, social media)
 - **Otto AI** - Your hyperintelligent multi-agent assistant
@@ -65,7 +65,7 @@ This isn't just another AI wrapper - it's a **complete business operating system
 ## 🤖 Otto AI Assistant
 Your hyperintelligent multi-agent AI powered by Claude Sonnet 3.5/4:
 - **Slash Commands** (`/image`, `/video`, `/music`, `/pdf`, `/python`, `/chain`, `/help`) - 100+ built-in commands
-- **Knowledge Base** - Remembers your products, brand, campaigns
+- **Knowledge Base** - Remembers your products, assets, campaigns
 - **Multi-Agent System** - Coordinates specialized AI agents for complex tasks
 - **Context-Aware** - Understands your entire business context
 - **Action Execution** - Can directly create campaigns, products, and content
@@ -78,7 +78,7 @@ Your hyperintelligent multi-agent AI powered by Claude Sonnet 3.5/4:
 **One-click complete campaign generation**
 - Generate 6-asset campaigns in parallel (product page, ads, social posts, email, video, mockups)
 - Mass-produce hundreds of product variations
-- Automated brand-consistent styling
+- Automated assets-consistent styling
 - **Performance**: 7x faster with Ray parallelization (70s → 10s)
 
 #### 🛍️ Products Tab
@@ -386,8 +386,8 @@ Your hyperintelligent multi-agent AI powered by Claude Sonnet 3.5/4:
 
 ```bash
 # 1. Clone and setup
-git clone https://github.com/RhythrosaLabs/autonomous-business-platform.git
-cd autonomous-business-platform
+git clone https://github.com/RhythrosaLabs/nova-system.git
+cd nova-system
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
@@ -397,7 +397,7 @@ cp .env.example .env
 nano .env  # Add at minimum: REPLICATE_API_TOKEN and ANTHROPIC_API_KEY
 
 # 3. Launch!
-streamlit run autonomous_business_platform.py
+streamlit run nova_system.py
 ```
 
 **Then open:** http://localhost:8501 and test your APIs in Settings → 🔌 Test Connections
@@ -409,14 +409,14 @@ streamlit run autonomous_business_platform.py
 - [Anthropic API](https://console.anthropic.com/) - For Claude/Otto AI
 
 **Optional APIs** (add later):
-- [Printify](https://printify.com/app/account/api) - Product mockups
-- [Shopify](https://shopify.dev/docs/apps/auth) - E-commerce
+- [Printify](https://nv_printify.com/core/account/api) - Product mockups
+- [Shopify](https://shopify.dev/guides/apps/auth) - E-commerce
 - [YouTube](https://console.cloud.google.com) - Video publishing
 - OpenAI, Pinterest, TikTok, Instagram, LinkedIn, Facebook, Twitter
 
 **Advanced Launch** (with backend API + Ray):
 ```bash
-cd scripts
+cd tools
 ./start_platform.sh  # Starts all services
 ```
 
@@ -428,7 +428,7 @@ cd scripts
 
 Access:
 - 🎨 **Frontend**: http://localhost:8501
-- 🔧 **API**: http://localhost:8601/docs
+- 🔧 **API**: http://localhost:8601/guides
 - 📊 **Ray Dashboard**: http://localhost:8265
 
 ---
@@ -462,7 +462,7 @@ docker build -t abp .
 # Run backend
 docker run -d -p 8601:8601 -p 8265:8265 \
   --env-file .env abp \
-  python -m uvicorn fastapi_backend:app --host 0.0.0.0 --port 8601
+  python -m uvicorn nv_fastapi_backend:core --host 0.0.0.0 --port 8601
 
 # Run frontend
 docker run -d -p 8501:8501 --env-file .env abp
@@ -473,13 +473,13 @@ docker run -d -p 8501:8501 --env-file .env abp
 ## 🌐 Cloud Deployment
 
 ### Deploy to Railway
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/RhythrosaLabs/autonomous-business-platform)
+[![Deploy on Railway](https://railway.core/button.svg)](https://railway.core/new/template?template=https://github.com/RhythrosaLabs/nova-system)
 
 ### Deploy to Render
 1. Fork this repository
 2. Create Web Service on [Render](https://render.com)
 3. Build: `pip install -r requirements.txt`
-4. Start: `streamlit run autonomous_business_platform.py --server.port $PORT`
+4. Start: `streamlit run nova_system.py --server.port $PORT`
 5. Add environment variables
 
 ### Deploy to Fly.io
@@ -541,37 +541,37 @@ Type `/` in any text field:
 
 ### Project Structure
 ```
-autonomous-business-platform/
-├── autonomous_business_platform.py  # Main Streamlit entry point
-├── app/
-│   ├── core/               # App factory, DI container, error handling
-│   ├── tabs/               # 21 feature tab modules
-│   │   ├── abp_dashboard.py
-│   │   ├── abp_products.py
-│   │   ├── abp_content.py
-│   │   ├── abp_video.py
-│   │   ├── abp_campaigns.py
-│   │   ├── abp_custom_workflows.py
-│   │   ├── abp_playground.py
-│   │   ├── abp_browser_use.py
+nova-system/
+├── nova_system.py  # Main Streamlit entry point
+├── core/
+│   ├── core/               # App factory, DI nv_container, error handling
+│   ├── tabs/               # 21 feature tab plugins
+│   │   ├── nv_abp_dashboard.py
+│   │   ├── nv_abp_products.py
+│   │   ├── nv_abp_content.py
+│   │   ├── nv_abp_video.py
+│   │   ├── nv_abp_campaigns.py
+│   │   ├── nv_abp_custom_workflows.py
+│   │   ├── nv_abp_playground.py
+│   │   ├── nv_abp_browser_use.py
 │   │   └── ...              # + 13 more tabs
-│   ├── services/           # 70+ service modules
-│   │   ├── otto_engine.py   # Otto AI brain
-│   │   ├── chat_assistant.py
-│   │   ├── global_job_queue.py
-│   │   ├── printify.py
-│   │   ├── shopify_service.py
+│   ├── services/           # 70+ service plugins
+│   │   ├── nv_otto_engine.py   # Otto AI brain
+│   │   ├── nv_chat_assistant.py
+│   │   ├── nv_global_job_queue.py
+│   │   ├── nv_printify.py
+│   │   ├── nv_shopify_service.py
 │   │   └── ...
 │   ├── ui/                 # Layout and shared UI
-│   └── utils/              # Helpers, validation, caching
-├── modules/                # Shared orchestration modules
-│   ├── orchestrator.py
-│   ├── video_generation.py
+│   └── utils/              # Helpers, nv_validation, caching
+├── plugins/                # Shared orchestration plugins
+│   ├── nv_orchestrator.py
+│   ├── nv_video_generation.py
 │   └── ...
-├── brand/                  # Brand templates & generator
-├── scripts/
+├── assets/                  # Brand templates & generator
+├── tools/
 │   └── start_platform.sh   # Multi-service launcher
-├── tests/                  # Unit & integration tests
+├── specs/                  # Unit & integration specs
 ├── requirements.txt
 ├── Dockerfile
 └── docker-compose.yml
@@ -579,7 +579,7 @@ autonomous-business-platform/
 
 ### Running Tests
 ```bash
-pytest tests/
+pytest specs/
 ```
 
 ### Code Quality
@@ -620,14 +620,14 @@ pylint **/*.py    # Linting
 - **Campaign Files**: Organized by campaign name in subdirectories
 - **Backup Files**: `.backup` extension files stored alongside originals
 
-**Streamlit Demo (otto-mate.streamlit.app):**
+**Streamlit Demo (otto-mate.streamlit.core):**
 - Files are stored in temporary memory during your session
-- ⚠️ **Important**: Files are lost when the session ends or app restarts
+- ⚠️ **Important**: Files are lost when the session ends or core restarts
 - Download files immediately after generation to save them locally
 
 ### Streamlit Demo Limitations
 
-The hosted demo at **[otto-mate.streamlit.app](https://otto-mate.streamlit.app)** has these limitations:
+The hosted demo at **[otto-mate.streamlit.core](https://otto-mate.streamlit.core)** has these limitations:
 
 - **No Persistent File Storage**: Files exist only during your active session
   - ⚠️ **CRITICAL**: Generated files cannot be saved to disk on Streamlit Cloud
@@ -637,7 +637,7 @@ The hosted demo at **[otto-mate.streamlit.app](https://otto-mate.streamlit.app)*
 - **Limited Resources**: Shared computing resources may result in slower generation
 - **No System Access**: Cannot access your local files or install dependencies
 - **No Environment Variables**: Some integrations requiring API keys may not work
-- **Cold Starts**: First load may take 30-60 seconds while container spins up
+- **Cold Starts**: First load may take 30-60 seconds while nv_container spins up
 
 **Recommendation**: For production use with persistent file storage, local API integrations, and optimal performance, install locally by following the Setup section below.
 
@@ -675,7 +675,7 @@ This platform has been audited and hardened against common security risks:
    - ✅ `.env` files are in `.gitignore`
 
 4. **Demo vs Local**:
-   - **Demo (otto-mate.streamlit.app)**: You must enter your own API keys each session
+   - **Demo (otto-mate.streamlit.core)**: You must enter your own API keys each session
    - **Local Installation**: Keys saved in `.env` file on your computer only
 
 ### File Privacy
@@ -726,8 +726,8 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## 📧 Support & Community
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/RhythrosaLabs/autonomous-business-platform/issues)
-- 📖 **Documentation**: [Wiki](https://github.com/RhythrosaLabs/autonomous-business-platform/wiki)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/RhythrosaLabs/nova-system/issues)
+- 📖 **Documentation**: [Wiki](https://github.com/RhythrosaLabs/nova-system/wiki)
 
 ---
 

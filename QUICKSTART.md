@@ -26,8 +26,8 @@ python3 --version
 
 ```bash
 # Open terminal and run:
-git clone https://github.com/RhythrosaLabs/autonomous-business-platform.git
-cd autonomous-business-platform
+git clone https://github.com/RhythrosaLabs/nova-system.git
+cd nova-system
 ```
 
 **Don't have git?**
@@ -59,7 +59,7 @@ pip install -r requirements.txt
 ```
 
 **If you get errors:**
-- Make sure you're in the `autonomous-business-platform` folder
+- Make sure you're in the `nova-system` folder
 - Make sure `(venv)` shows in your terminal
 - Try: `pip install --upgrade pip` then retry
 
@@ -96,20 +96,20 @@ nano .env  # or: code .env  # or: open .env
 ### Option A: Simple Launch (Recommended for First Test)
 
 ```bash
-# Just run the Streamlit app - perfect for testing!
-streamlit run autonomous_business_platform.py
+# Just run the Streamlit core - perfect for testing!
+streamlit run nova_system.py
 ```
 
 **What you get:**
 - ✅ Full Streamlit UI (all tabs, all features)
-- ✅ API validation test buttons
+- ✅ API nv_validation test buttons
 - ✅ Campaign generation works
 - ⚠️ No parallel processing (slower for batch operations)
 - ⚠️ No background job queue
 
 **You'll see:**
 ```
-  You can now view your Streamlit app in your browser.
+  You can now view your Streamlit core in your browser.
 
   Local URL: http://localhost:8501
 ```
@@ -119,7 +119,7 @@ streamlit run autonomous_business_platform.py
 ### Option B: Full Launch (Backend + Ray + Frontend) - Recommended for Production
 
 ```bash
-cd scripts
+cd tools
 ./start_platform.sh
 ```
 
@@ -132,7 +132,7 @@ cd scripts
 
 **Access:**
 - Frontend (UI): http://localhost:8501
-- API Docs: http://localhost:8000/docs
+- API Docs: http://localhost:8000/guides
 - Ray Dashboard: http://localhost:8265
 
 **When to use Full Launch:**
@@ -156,10 +156,10 @@ cd scripts
    - Click "🔌 Test" button next to Anthropic
    - You should see ✅ green success messages!
 
-4. **If tests fail:**
+4. **If specs fail:**
    - Double-check your API keys in `.env`
    - Make sure there are no spaces before/after the key
-   - Restart: `Ctrl+C` then `streamlit run autonomous_business_platform.py` again
+   - Restart: `Ctrl+C` then `streamlit run nova_system.py` again
 
 ---
 
@@ -198,12 +198,12 @@ pip install -r requirements.txt
 # Kill existing Streamlit process
 pkill -f streamlit
 # Then relaunch
-streamlit run autonomous_business_platform.py
+streamlit run nova_system.py
 ```
 
 ### "API key invalid"
 - Get fresh keys from Replicate/Anthropic
-- Make sure `.env` file is in the root folder (same folder as `autonomous_business_platform.py`)
+- Make sure `.env` file is in the root folder (same folder as `nova_system.py`)
 - No spaces: `REPLICATE_API_TOKEN=r8_abc123` not `REPLICATE_API_TOKEN = r8_abc123`
 
 ### Tests show ❌ but keys are correct
@@ -220,7 +220,7 @@ Watch step-by-step setup: [Link will be added]
 
 ## 💬 Need Help?
 
-- **Issues**: https://github.com/RhythrosaLabs/autonomous-business-platform/issues
+- **Issues**: https://github.com/RhythrosaLabs/nova-system/issues
 - **Discussions**: Use GitHub Discussions tab
 - **Documentation**: See full [README.md](README.md)
 
@@ -233,9 +233,9 @@ Watch step-by-step setup: [Link will be added]
 - [ ] Virtual environment created and activated
 - [ ] Dependencies installed (`pip install -r requirements.txt`)
 - [ ] `.env` file created with API keys
-- [ ] Platform launched (`streamlit run autonomous_business_platform.py`)
+- [ ] Platform launched (`streamlit run nova_system.py`)
 - [ ] Browser opened to http://localhost:8501
-- [ ] API tests show ✅ green checkmarks
+- [ ] API specs show ✅ green checkmarks
 - [ ] First campaign generated successfully
 
 **If all checked, you're ready to automate your business! 🚀**
